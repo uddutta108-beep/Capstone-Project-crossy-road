@@ -1,4 +1,4 @@
-import pgzrun
+import pgzrun, random
 
 WIDTH = 600
 HEIGHT = 800
@@ -26,10 +26,10 @@ def on_key_down(key):
         if key == key.SPACE:
             chicken.y = chicken.y - 20
 
-for y in range(12):
+for y in range(10):
     enemies.append (Actor("bug"))
 
-    enemies[-1].y = 80 + 50 * y
+    enemies[-1].y = 100 + 50 * y
 
 def draw():
     screen.clear()
@@ -45,14 +45,16 @@ def draw():
 
 def update():
     global direction, enemies
-
-    if (enemies[-1].x < WIDTH-80 or enemies[0].x > 80):
-
-        direction = direction*-1
-
     for enemy in enemies:
-        enemy.x += 5*direction
+        if (enemies[-1].x > WIDTH or enemies[0].x < 0):
 
+            direction = direction*-1
+
+        
+        enemy.x += 5*direction
+        direction = random.randint(1,3)
+
+# create different actors for each bug
 
 
 pgzrun.go()
